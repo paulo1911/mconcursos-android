@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!-- Rightend Arrow -->
+    <ImageView
+        android:id="@+id/imageView1"
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="5dip"
+        android:src="@drawable/abs__ic_go_search_api_holo_light"/>
+    
+    <TextView
+        android:id="@+id/dataFonte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+ 
+ <!--
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/anexoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:layout_alignParentBottom="true"/>  -->
+    
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dataFonte"
+        android:layout_alignLeft="@+id/dataFonte"
+        android:layout_alignParentBottom="@+id/dataFonte"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="#040404"
+        android:textSize="18dip"
+        android:textStyle="bold"
+        android:typeface="sans"
+        android:layout_marginRight="2dip" />
+    
+    <!-- Weather Information-->
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titulo"
+        android:layout_alignLeft="@+id/titulo"
+        android:layout_alignParentBottom="@+id/titulo"
+        android:layout_centerHorizontal="true"
+        android:textColor="#343434"
+        android:textSize="15dip" />
+        <!-- Weather Information-->
+    
+        <ImageView
+        android:id="@+id/anexoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+       	android:layout_below="@+id/descricao"
+        android:layout_alignLeft="@+id/descricao"/>
+
+</RelativeLayout>

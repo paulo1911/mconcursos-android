@@ -11,5 +11,6 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_teste"/>
+    <item android:id="@+id/search" android:title="@string/item_menu_search" android:showAsAction="ifRoom|withText"></item>
 
 </menu>
