@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    
+    <!-- Icone do menu -->
+    <LinearLayout
+        android:id="@+id/thumbnailMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="2dip"
+        android:padding="1dip" >
+       <!--         <ImageView
+            android:id="@+id/iconeMenu"
+            android:layout_width="60dip"
+            android:layout_height="60dip"/>   --> 
+       <ImageView
+            android:id="@+id/iconeMenu"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"/>        
+    </LinearLayout>
+    
+    <!-- setinha do item do menu -->
+    <ImageView
+        android:id="@+id/arrow"
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/abs__ic_go_search_api_holo_light"/>
+    
+    <!-- Lebel do menu item-->
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/thumbnailMenu"
+        android:layout_centerVertical="true"
+        android:paddingBottom ="1dip"
+        android:textSize="18dip"
+        android:textStyle="bold"/>
+
+</RelativeLayout>  

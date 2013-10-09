@@ -4,11 +4,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+        <ImageView
+        android:id="@+id/imageView1"
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="2dip"
+        android:src="@drawable/abs__ic_go_search_api_holo_light"/>
+    
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="#000"
         android:dividerHeight="1dp"/>
 
 </RelativeLayout>

@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.http.HttpEntity;
@@ -27,6 +29,7 @@ import android.util.Log;
 import br.com.econcursos.domain.model.ArquivoAnexoModel;
 import br.com.econcursos.domain.model.Concurso;
 import br.com.econcursos.util.DataUtils;
+import br.com.econcursos.util.PageDescriptorWS;
 import br.com.econcursos.webservice.model.ConcursosWS;
 
 /**
@@ -36,9 +39,9 @@ import br.com.econcursos.webservice.model.ConcursosWS;
 public class ConcursosService {
 
 	@SuppressLint("DefaultLocale")
-	public ArrayList<Concurso> getConcursos(String urlPath, Integer page) {
+	public Map<String,Object> getConcursosMapResults(String urlPath, Integer page) throws Exception {
 		
-		ArrayList<Concurso> listToReturn = null;
+		Map<String,Object> mapToReturn = null;
 		
 		if(urlPath !=null ) {
 	
@@ -50,15 +53,15 @@ public class ConcursosService {
 				
 				stringResult = doGetRequest(urlGet);
 				
-				listToReturn = getListConcursoFromJsonResult(stringResult);
+				mapToReturn = getMapResults(stringResult);
 				
 			} catch (ClientProtocolException e) {
-				e.printStackTrace();
+				throw e;
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
-		return listToReturn;
+		return mapToReturn;
 	}
 	
 	/**
@@ -100,45 +103,106 @@ public class ConcursosService {
 	 * Retorna {@link List<{@link Concurso}>} a partir de uma String json
 	 * @param result
 	 * @return
+	 * @throws Exception 
 	 */
-	private ArrayList<Concurso> getListConcursoFromJsonResult(String result) {
+	@SuppressWarnings("unchecked")
+	private ArrayList<Concurso> getListConcursoFromJsonResult(String result) throws Exception {
 		
-		ArrayList<Concurso> listToReturn = null;
+		Map<String,Object> resultMap = getMapResults(result);
+		
+		return (resultMap != null)? (ArrayList<Concurso>) resultMap.get("concursosList") : null;		
+		
+	}
+	
+	private	Map<String,Object> getMapResults(String result) throws Exception {
+		
+		Map<String,Object> toReturn  = null;
 		
 		if (result != null) {
 			
-			JSONObject jsonRsult = null;
-			JSONObject jsonResponse = null;
-			JSONArray concursosArrayObject = null;
+			toReturn = new HashMap<String, Object>();
 			
-			try {
-				
-				jsonRsult = new JSONObject(result);
-				jsonResponse = jsonRsult.getJSONObject(ConcursosWS.RESPONSE);
-				concursosArrayObject = jsonResponse.getJSONArray(ConcursosWS.CONCURSOS_LIST);
-				
-				if(concursosArrayObject != null && concursosArrayObject.length() > 0) {
-					
-					listToReturn = new ArrayList<Concurso>();
-					
-					for(int i=0;i < concursosArrayObject.length() ; i++) {
-						
-						listToReturn.add(getConcursoFromJsonObject(concursosArrayObject.getJSONObject(i)));
-						
-					}
-				
-				}
-				
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
+			toReturn.put("pageDescriptor", getPageDescriptor(result));
+			toReturn.put("concursosList", getConcursosList(result));
 		}
 
+		return toReturn;
+	}
+	
+	private ArrayList<Concurso> getConcursosList(String result) throws Exception {
+		
+		ArrayList<Concurso> listToReturn = null;
+		
+		JSONObject jsonRsult = null;
+		JSONObject jsonResponse = null;
+		JSONArray concursosArrayObject = null;
+		
+		try {
+			
+			jsonRsult = new JSONObject(result);
+			jsonResponse = jsonRsult.getJSONObject(ConcursosWS.RESPONSE);
+			concursosArrayObject = jsonResponse.getJSONArray(ConcursosWS.CONCURSOS_LIST);
+			
+			if(concursosArrayObject != null && concursosArrayObject.length() > 0) {
+				
+				listToReturn = new ArrayList<Concurso>();
+				
+				for(int i=0;i < concursosArrayObject.length() ; i++) {
+					
+					listToReturn.add(getConcursoFromJsonObject(concursosArrayObject.getJSONObject(i)));
+					
+				}
+			
+			}
+			
+			
+		} catch (Exception e) {
+			throw e;
+		}
+		
 		return listToReturn;
 	}
 	
+	/**
+	 * Retorna page descritor do resultado obtido
+	 * @param result
+	 * @return
+	 */
+	private PageDescriptorWS getPageDescriptor(String result) {
+		
+		PageDescriptorWS pageDescriptor = null;
+		
+		JSONObject jsonRsult = null;
+		JSONObject jsonResponse = null;
+		JSONObject pageDescriptorObject = null;
+		
+		try {
+			
+			jsonRsult = new JSONObject(result);
+			jsonResponse = jsonRsult.getJSONObject(ConcursosWS.RESPONSE);
+			pageDescriptorObject = jsonResponse.getJSONObject(PageDescriptorWS.PAGE_DESCRIPTOR_ELEMENT);
+			
+			if(pageDescriptorObject != null) {
+				
+				pageDescriptor = new PageDescriptorWS();
+				
+				Integer page = (pageDescriptorObject.has(PageDescriptorWS.FIELD_PAGE)) ? Integer.valueOf(getStringData(PageDescriptorWS.FIELD_PAGE, pageDescriptorObject)) : 1;
+				Integer pageSize = (pageDescriptorObject.has(PageDescriptorWS.FIELD_PAGESIZE)) ? Integer.valueOf(getStringData(PageDescriptorWS.FIELD_PAGESIZE, pageDescriptorObject)) : 1;
+				Long totalEntries = (pageDescriptorObject.has(PageDescriptorWS.FIELD_TOTAL_ENTRIES)) ? Long.valueOf(getStringData(PageDescriptorWS.FIELD_TOTAL_ENTRIES, pageDescriptorObject)) : 1L;
+				
+				pageDescriptor.setPage(page);
+				pageDescriptor.setPageSize(pageSize);
+				pageDescriptor.setTotalEntries(totalEntries);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return pageDescriptor;
+	}
+
 	/**
 	 * Retorna {@link Concurso} a partir de um {@link JSONObject} informado
 	 * @param concursoObject

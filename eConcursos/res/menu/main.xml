@@ -5,12 +5,13 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_settings"/>
-    
+   <!--  
     <item
         android:id="@+id/action_run"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_teste"/>
-    <item android:id="@+id/search" android:title="@string/item_menu_search" android:showAsAction="ifRoom|withText"></item>
+    
+    <item android:id="@+id/search" android:title="@string/item_menu_search" android:showAsAction="ifRoom|withText"></item>  -->
 
 </menu>

@@ -38,7 +38,7 @@ public class MainActivity extends SherlockFragmentActivity implements MenuClickI
     }
 
 	@Override
-	public void onListitemClick(String item) {
+	public void onListitemClick(MenuItem item) {
 		//chama outras activits aqui
 	}
 }

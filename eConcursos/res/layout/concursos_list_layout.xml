@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:paddingLeft="5dip"
+        android:paddingLeft="2dip"
         android:src="@drawable/abs__ic_go_search_api_holo_light"/>
     
     <TextView
@@ -49,10 +49,10 @@
         android:textAlignment="center"
         android:layout_centerHorizontal="true"
         android:textColor="#040404"
-        android:textSize="18dip"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:typeface="sans"
-        android:layout_marginRight="2dip" />
+        android:layout_marginRight="20sp" />
     
     <!-- Weather Information-->
     <TextView
@@ -64,15 +64,27 @@
         android:layout_alignParentBottom="@+id/titulo"
         android:layout_centerHorizontal="true"
         android:textColor="#343434"
-        android:textSize="15dip" />
+        android:textSize="15sp"
+        android:layout_marginRight="20sp" />
         <!-- Weather Information-->
     
         <ImageView
         android:id="@+id/anexoImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
        	android:layout_below="@+id/descricao"
         android:layout_alignLeft="@+id/descricao"/>
+       
+       <TextView
+        android:id="@+id/totalAnexos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:layout_below="@+id/descricao"
+       	android:layout_toRightOf="@+id/anexoImage"
+       	android:layout_alignParentBottom="true"
+        android:paddingLeft="2dip"
+        android:textColor="#343434"
+        android:textSize="15sp"
+        android:layout_marginRight="5sp" />
 
 </RelativeLayout>

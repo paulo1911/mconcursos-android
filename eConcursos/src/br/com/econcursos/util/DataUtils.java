@@ -53,7 +53,7 @@ public class DataUtils {
 	public static String formatDateDiaMesAno(Date dataPublicacao) {
 
 		if(dataPublicacao !=null) {			
-			return new SimpleDateFormat("dd/mm/yyyy").format(dataPublicacao);			
+			return new SimpleDateFormat("dd/MM/yyyy").format(dataPublicacao);			
 		}		
 		return null;
 	}

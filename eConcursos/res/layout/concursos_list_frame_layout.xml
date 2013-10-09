@@ -3,22 +3,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.25" >
-
-        <ImageView
+       <!--  <ImageView
             android:id="@+id/status_running"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/abs__spinner_48_inner_holo" />
+            android:src="@drawable/abs__spinner_48_inner_holo" />  -->
 
         <ListView
             android:id="@+id/list_concursos"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"/>
-        
-    </FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dip"
+     		android:dividerHeight="2dp"/>
+
 </LinearLayout>

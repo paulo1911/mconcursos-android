@@ -2,10 +2,14 @@
 <resources>
 
     <string name="app_name">eConcursos</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_teste">Te amo</string>
-    
-    <string name="item_menu_search">Pesquisar</string>
+    <string name="action_settings">Configurações</string>
+    <string name="item_menu_home">Home</string>
+    <string name="item_menu_em_destaque">Concursos em Destaque</string>
+    <string name="item_menu_no_brasil">Concursos no Brasil</string>
+    <string name="item_menu_por_estados">Concursos por Estado</string>
+    <string name="item_menu_por_regiao">Concursos por Regiões</string>
+    <string name="item_menu_favoritos">Favoritos</string>
+    <string name="menu_item_provas_gabaritos">Provas e Gabritos</string>
+    <string name="menu_item_preferencias">Preferencias</string>
 
 </resources>

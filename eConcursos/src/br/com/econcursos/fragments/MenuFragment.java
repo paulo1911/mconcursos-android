@@ -17,9 +17,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import br.com.econcursos.AppMenuList;
 import br.com.econcursos.R;
+import br.com.econcursos.view.menu.MenuAdapter;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.MenuItem;
 
 public class MenuFragment extends SherlockFragment {
     ListView list;
@@ -38,14 +41,16 @@ public class MenuFragment extends SherlockFragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-                String i=(String) arg0.getItemAtPosition(arg2);
+                MenuItem i=(MenuItem) arg0.getItemAtPosition(arg2);
                 mClick.onListitemClick(i);
             }
         });
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.menu_list_layout, container, false);
+        View v = inflater.inflate(R.layout.menu_side_layout, container, false);
+        ListView listMenu = (ListView) v.findViewById(R.id.list);
+        listMenu.setAdapter(new MenuAdapter(getSherlockActivity(), AppMenuList.getAppMenuList(getSherlockActivity())));        
         return v;
     }
 }
