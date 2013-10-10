@@ -39,8 +39,7 @@ public class MenuFragment extends SherlockFragment {
         list.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                    long arg3) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 MenuItem i=(MenuItem) arg0.getItemAtPosition(arg2);
                 mClick.onListitemClick(i);
             }

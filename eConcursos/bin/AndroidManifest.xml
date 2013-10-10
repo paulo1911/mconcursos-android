@@ -26,5 +26,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ConcursoListActivity"></activity>
+        <activity android:name=".activity.DetalheConcursoActivity"></activity>
     </application>
 </manifest>

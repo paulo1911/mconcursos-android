@@ -3,24 +3,25 @@
  */
 package br.com.econcursos.fragments;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.ImageView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import br.com.econcursos.R;
+import br.com.econcursos.activity.DetalheConcursoActivity;
 import br.com.econcursos.domain.model.Concurso;
 import br.com.econcursos.domain.model.ConcursosAdapter;
 import br.com.econcursos.webservice.ConcursosService;
@@ -31,7 +32,7 @@ import com.actionbarsherlock.app.SherlockFragment;
  * @author Paulo
  *
  */
-public class HomeFragment extends SherlockFragment implements Runnable, OnScrollListener {
+public class HomeFragment extends SherlockFragment implements Runnable, OnScrollListener, OnItemClickListener {
 	
 	private ProgressDialog dialog = null;
 	private Integer page = 1;
@@ -54,9 +55,7 @@ public class HomeFragment extends SherlockFragment implements Runnable, OnScroll
 	private void getConcursosToStart() {		
 		
 		dialog = ProgressDialog.show(getActivity(), "Aguarde", "Obtendo dados de concursos...");
-		
-		//ImageView imageView = (ImageView) getView().findViewById(R.id.status_running);
-		//imageView.setVisibility(View.VISIBLE);
+
 		new Thread(this).start();
 	}
 	
@@ -78,6 +77,7 @@ public class HomeFragment extends SherlockFragment implements Runnable, OnScroll
         View v = inflater.inflate(R.layout.concursos_list_frame_layout, container, false);
         ListView list = (ListView) v.findViewById(R.id.list_concursos);
         list.setOnScrollListener(this);
+        list.setOnItemClickListener(this);
         return v;
     }
 	
@@ -213,5 +213,18 @@ public class HomeFragment extends SherlockFragment implements Runnable, OnScroll
 
 	}
 	
+	@Override
+	public void onItemClick(AdapterView<?> item, View view, int position, long arg3) {
+		
+        Concurso concurso = (Concurso) item.getItemAtPosition(position);
+        
+        Intent intent = new Intent(getActivity(),DetalheConcursoActivity.class);
+        intent.putExtra(Concurso.ID_FIELD, concurso.getId());
+        
+        
+        startActivity(intent);
+        
+        Log.i(getClass().getName(), String.format("Concurso id: %s", concurso.getId()));		
+	}
 	
 }

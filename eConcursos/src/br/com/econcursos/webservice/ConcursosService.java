@@ -38,6 +38,8 @@ import br.com.econcursos.webservice.model.ConcursosWS;
  */
 public class ConcursosService {
 
+	public static final String URL_GET_CONCURSOS_BY_ID = "http://mconcurso-pauloleite.rhcloud.com/rest/concursos";
+	
 	@SuppressLint("DefaultLocale")
 	public Map<String,Object> getConcursosMapResults(String urlPath, Integer page) throws Exception {
 		
@@ -340,5 +342,62 @@ public class ConcursosService {
 		}
 		
 		return toReturn;
+	}
+	
+	/**
+	 * Retorna um {@link Concurso} a partir do id informado
+	 * @param idConcurso
+	 * @return
+	 * @throws Exception 
+	 */
+	public Concurso getConcursoById(String idConcurso) throws Exception {
+		
+		if(idConcurso != null ) {
+			
+			String urlGetConcursoById = String.format("%s/%s",URL_GET_CONCURSOS_BY_ID, idConcurso);
+			
+			String result = doGetRequest(urlGetConcursoById);
+			
+			if(result != null) {
+				
+				return getConcursoFromJsonResult(result);
+			}
+		
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Retorna {@link Concurso} de um json result informado
+	 * @param result
+	 * @return
+	 * @throws Exception
+	 */
+	private Concurso getConcursoFromJsonResult(String result) throws Exception {
+		Concurso concursoToReturn = null; 
+		
+		if(result != null) {
+			
+			JSONObject jsonRsult = null;
+			JSONObject jsonResponse = null;
+			JSONObject concursoObject = null;
+			
+			try {
+				
+				jsonRsult = new JSONObject(result);
+				jsonResponse = (jsonRsult != null && jsonRsult.has(ConcursosWS.RESPONSE)) ? jsonRsult.getJSONObject(ConcursosWS.RESPONSE) : null;
+				concursoObject = (jsonResponse != null && jsonResponse.has(ConcursosWS.CONCURSO_SINGLE)) ? jsonResponse.getJSONObject(ConcursosWS.CONCURSO_SINGLE) : null;
+				
+				if(concursoObject != null && concursoObject.length() > 0) {					
+					concursoToReturn = getConcursoFromJsonObject(concursoObject);				
+				}				
+				
+			} catch (Exception e) {
+				throw e;
+			}			
+		}
+		
+		return concursoToReturn;
 	}
 }

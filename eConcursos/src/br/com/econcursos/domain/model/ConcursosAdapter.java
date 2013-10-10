@@ -68,13 +68,13 @@ public class ConcursosAdapter extends BaseAdapter {
 		TextView titulo = (TextView) viewToReturn.findViewById(R.id.titulo);
 		titulo.setVerticalScrollBarEnabled(false);
 		titulo.setText(getDescriptionToTextView(concurso.getTitulo(), 100, "."));		
-		TextJustify.run(titulo, 305f);		
+		//TextJustify.run(titulo, 305f);		
 		
 		TextView descricao = (TextView) viewToReturn.findViewById(R.id.descricao);
 		descricao.setVerticalScrollBarEnabled(false);
-		descricao.setText(getDescriptionToTextView(concurso.getDescricao(), 150, "."));
+		descricao.setText(getDescriptionToTextView(concurso.getDescricao(), 120, "..."));
 		descricao.setPadding(0,5,0, 20);		
-		TextJustify.run(descricao, 305f);
+		//TextJustify.run(descricao, 305f);
 		
 		if(concurso.getTotalAnexos() != null && concurso.getTotalAnexos() > 0) {
 			descricao.setPadding(0,5,0,10);
