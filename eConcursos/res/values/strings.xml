@@ -11,5 +11,6 @@
     <string name="item_menu_favoritos">Favoritos</string>
     <string name="menu_item_provas_gabaritos">Provas e Gabritos</string>
     <string name="menu_item_preferencias">Preferencias</string>
+    <string name="label_apinner_anexo">Editais e Anexos</string>
 
 </resources>

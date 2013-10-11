@@ -315,7 +315,7 @@ public class ConcursosService {
 			}		
 		
 		}
-		return null;
+		return setAnexosToReturn;
 	}
 	
 	/**

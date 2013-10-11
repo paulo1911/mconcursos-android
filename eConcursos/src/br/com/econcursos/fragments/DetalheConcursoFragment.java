@@ -3,20 +3,25 @@
  */
 package br.com.econcursos.fragments;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import br.com.econcursos.R;
+import br.com.econcursos.domain.model.AnexosSpinnerAdapter;
+import br.com.econcursos.domain.model.ArquivoAnexoModel;
 import br.com.econcursos.domain.model.Concurso;
+import br.com.econcursos.util.DataUtils;
 import br.com.econcursos.webservice.ConcursosService;
 
-import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 
 
@@ -69,18 +74,23 @@ public class DetalheConcursoFragment extends SherlockFragment implements Runnabl
 				
 				@Override
 				public void run() {
-					//LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-					View view  = getView();//inflater.inflate(R.layout.detalhe_concurso_layout, null);
-					
-					TextView dataFonteDetalhe = (TextView) view.findViewById(R.id.dataFonteDetalhe);
-					dataFonteDetalhe.setText((concurso.getDataPublicacao() != null) ? concurso.getDataPublicacao().toString() : null);
+					View view  = getView();
 					
 					TextView titulo = (TextView) view.findViewById(R.id.title);
 					titulo.setText(concurso.getTitulo());
 					
+					TextView dataFonteDetalhe = (TextView) view.findViewById(R.id.dataFonteDetalhe);
+					dataFonteDetalhe.setText((concurso.getDataPublicacao() != null) ? DataUtils.formatDatePorExtenso(concurso.getDataPublicacao()) : null);
+					
 					TextView description = (TextView) view.findViewById(R.id.description);
 					description.setText(concurso.getDescricao());
 					
+					if(concurso.getAnexos() != null) {					
+						Spinner anexos = (Spinner) view.findViewById(R.id.attachments);
+						List<ArquivoAnexoModel> anexosList = new ArrayList<ArquivoAnexoModel>(concurso.getAnexos());
+						anexos.setAdapter(new AnexosSpinnerAdapter(context, anexosList));
+						anexos.setVisibility(View.VISIBLE);					
+					}					
 				}
 			});
 		
@@ -105,13 +115,9 @@ public class DetalheConcursoFragment extends SherlockFragment implements Runnabl
 	private Concurso getConcursoFromServer(String idConcurso) throws Exception {
 		 Concurso concurso = null;
 		 
-		 if(idConcurso != null ) {
-		 
-			 concurso = concursosService.getConcursoById(idConcurso);
-		 
-		 }
-		 
+		 if(idConcurso != null ) {		 
+			 concurso = concursosService.getConcursoById(idConcurso);		 
+		 }		 
 		return concurso;
-	}	
-	
+	}		
 }

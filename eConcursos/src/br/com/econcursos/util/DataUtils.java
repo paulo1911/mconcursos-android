@@ -2,6 +2,8 @@ package br.com.econcursos.util;
 
 
 import android.annotation.SuppressLint;
+
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +56,14 @@ public class DataUtils {
 
 		if(dataPublicacao !=null) {			
 			return new SimpleDateFormat("dd/MM/yyyy").format(dataPublicacao);			
+		}		
+		return null;
+	}
+	@SuppressLint("SimpleDateFormat")
+	public static String formatDatePorExtenso(Date dataPublicacao) {
+
+		if(dataPublicacao !=null) {			
+			return new SimpleDateFormat("EEEE, dd 'de' MMMM 'de' yyyy").format(dataPublicacao);			
 		}		
 		return null;
 	}
