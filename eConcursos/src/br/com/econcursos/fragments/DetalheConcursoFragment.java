@@ -6,12 +6,15 @@ package br.com.econcursos.fragments;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import br.com.econcursos.R;
@@ -20,6 +23,7 @@ import br.com.econcursos.domain.model.ArquivoAnexoModel;
 import br.com.econcursos.domain.model.Concurso;
 import br.com.econcursos.util.DataUtils;
 import br.com.econcursos.webservice.ConcursosService;
+import br.com.econcursos.widget.ActionDialog;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -29,7 +33,7 @@ import com.actionbarsherlock.app.SherlockFragment;
  * @author Paulo
  *
  */
-public class DetalheConcursoFragment extends SherlockFragment implements Runnable {
+public class DetalheConcursoFragment extends SherlockFragment implements Runnable, OnLongClickListener {
 
 	private ConcursosService concursosService = new ConcursosService();
 	private Handler viewHandler = new Handler();
@@ -38,6 +42,7 @@ public class DetalheConcursoFragment extends SherlockFragment implements Runnabl
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
+    	getActivity().setTheme(com.actionbarsherlock.R.style.Theme_Sherlock_Light);
 		super.onActivityCreated(savedInstanceState);
 		this.context = getActivity();
 		
@@ -60,6 +65,8 @@ public class DetalheConcursoFragment extends SherlockFragment implements Runnabl
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.detalhe_concurso_layout, container, false);
+        TextView desc = (TextView) v.findViewById(R.id.description);
+        desc.setOnLongClickListener(this);
         return v;
     }
 
@@ -119,5 +126,15 @@ public class DetalheConcursoFragment extends SherlockFragment implements Runnabl
 			 concurso = concursosService.getConcursoById(idConcurso);		 
 		 }		 
 		return concurso;
-	}		
+	}
+
+	@Override
+	public boolean onLongClick(View v) {
+		
+		Dialog actionDialog = new ActionDialog(getActivity());
+		actionDialog.show();
+		
+		return true;
+	}	
+	
 }

@@ -72,7 +72,7 @@ public class ConcursosAdapter extends BaseAdapter {
 		
 		TextView descricao = (TextView) viewToReturn.findViewById(R.id.descricao);
 		descricao.setVerticalScrollBarEnabled(false);
-		descricao.setText(getDescriptionToTextView(concurso.getDescricao(), 90, "..."));
+		descricao.setText(getDescriptionToTextView(concurso.getDescricao(), 80, "..."));
 		descricao.setPadding(0,5,0, 20);		
 		//TextJustify.run(descricao, 305f);
 		
@@ -88,7 +88,7 @@ public class ConcursosAdapter extends BaseAdapter {
 			totalAnexos.setText(String.format("Editais e Anexos (%d)", concurso.getTotalAnexos()));
 			totalAnexos.setPadding(0,5,0, 30);
 		}		
-		
+		notifyDataSetChanged();
 		return viewToReturn;
 	}
 	

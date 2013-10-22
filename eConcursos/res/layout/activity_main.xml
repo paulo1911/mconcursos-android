@@ -6,12 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
-
-    <fragment
-        android:id="@+id/frag_list_concursos"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        class="br.com.econcursos.fragments.HomeFragment" />
+    tools:context=".MainActivity"
+    android:id="@+id/fragment_container">
 
 </RelativeLayout>

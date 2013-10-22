@@ -24,14 +24,11 @@ public class AppMenuList {
 	private static List<MenuItem> getAppMenuListItem(Context context) {
 		List<MenuItem> toREturn = new ArrayList<MenuItem>();
 		
-		MenuItem inicioItem = new MenuBuilder(context).add(R.string.item_menu_home).setIcon(R.drawable.menu_home_azul);
+		MenuItem inicioItem = new MenuBuilder(context).add(R.string.item_menu_home).setIcon(R.drawable.icone_user_profile);
 		toREturn.add(inicioItem);
 		
 		MenuItem menuItemDestaque = new MenuBuilder(context).add(R.string.item_menu_em_destaque).setIcon(R.drawable.menu_item_destaque_brasil_azul);
 		toREturn.add(menuItemDestaque);
-		
-		MenuItem menuItemNoBrasil = new MenuBuilder(context).add(R.string.item_menu_no_brasil).setIcon(R.drawable.menu_item_no_brasil);
-		toREturn.add(menuItemNoBrasil);
 		
 		MenuItem menuItemPorEstado = new MenuBuilder(context).add(R.string.item_menu_por_estados).setIcon(R.drawable.menu_item_concurso_por_estado);
 		toREturn.add(menuItemPorEstado);
@@ -43,7 +40,10 @@ public class AppMenuList {
 		toREturn.add(menuItemFavoritos);
 		
 		MenuItem menuItemProvas = new MenuBuilder(context).add(R.string.menu_item_provas_gabaritos).setIcon(R.drawable.menu_item_provas_gabaritos);
-		toREturn.add(menuItemProvas);		
+		toREturn.add(menuItemProvas);
+		
+		MenuItem menuItemPreferencias = new MenuBuilder(context).add(R.string.menu_item_preferencias).setIcon(R.drawable.icon_preferences_selected);
+		toREturn.add(menuItemPreferencias);	
 		
 		return toREturn;
 	}

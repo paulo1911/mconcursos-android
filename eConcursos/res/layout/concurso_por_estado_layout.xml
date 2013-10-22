@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="0dp">
+
+       <TextView
+        android:id="@+id/label_concurso_por"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_centerVertical="true"		
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Estado:"/>
+       
+       <Spinner
+           android:id="@+id/spinner_estados_do_brasil"
+           android:layout_width="220dp"
+           android:layout_height="wrap_content"
+           android:layout_toRightOf="@+id/label_concurso_por"
+           android:layout_centerVertical="true"
+           android:contentDescription="@+string/label_apinner_estados"
+           android:prompt="@+string/label_apinner_estados"
+           android:spinnerMode="dialog" />
+       
+    </RelativeLayout>   
+	       
+       <ListView
+           android:id="@+id/list_concursos_por_estado"
+           android:layout_width="fill_parent"
+           android:layout_height="390dp"
+           android:layout_marginRight="5dp"
+           android:dividerHeight="2dp"
+           android:paddingTop="5dp" />
+
+</LinearLayout>

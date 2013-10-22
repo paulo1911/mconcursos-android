@@ -22,7 +22,7 @@
         	android:layout_height="wrap_content"/>        
     </LinearLayout>
     
-    <!-- setinha do item do menu 
+    <!-- setinha do item do menu  -->
     <ImageView
         android:id="@+id/arrow"
         android:contentDescription="@string/app_name"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/abs__ic_go_search_api_holo_light"/> -->
+        android:src="@drawable/abs__ic_go_search_api_holo_light"/>
     
     <!-- Lebel do menu item-->
     <TextView
